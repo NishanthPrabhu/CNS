@@ -37,7 +37,12 @@ class steg:
         pack.pay = packDet['pay']
         pack.options = packDet['option']
 
+        print('Packet being sent: ')
         print(pack.show2())
+
+        for i in range(10):
+            scapy.send(pack)
+
 
 ob = steg()
 print('Packet Generator\n')
