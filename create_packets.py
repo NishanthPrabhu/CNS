@@ -13,10 +13,15 @@ class steg:
 
         print('Possible fields to fill:  ')
         packetdict = {}
-        packetdict['src'] = raw_input('Enter source IP address: ')
-        packetdict['dst'] = raw_input('Enter destination IP address: ')
-        packetdict['ttl'] = int(raw_input('Enter time to live: '))
-        packetdict['id'] = int(raw_input('Enter ID of packet: '))
+        #packetdict['src'] = raw_input('Enter source IP address: ')
+        #packetdict['dst'] = raw_input('Enter destination IP address: ')
+        #packetdict['ttl'] = int(raw_input('Enter time to live: '))
+        #packetdict['id'] = int(raw_input('Enter ID of packet: '))
+        packetdict['src'] = '127.0.0.1'
+        packetdict['dst'] = '127.0.0.1'
+        packetdict['ttl'] = 11
+        packetdict['id'] = 1234
+
         packetdict['pay'] = raw_input('Enter packet payload data: ')
         packetdict['option'] = raw_input('Enter the packet options(optional): ')
 

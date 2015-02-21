@@ -6,9 +6,16 @@ import sys
 import scapy.all as scapy
 
 
-a=scapy.sniff(filter="ip")
-a.nsummary()
-#print(type(a))
+def displaypacket(packet):
 
-for item in a:
-    print(item.show2())
+    print(len(packet))
+
+
+def catchpackets():
+
+    packets = scapy.sniff(filter="ip", prn=displaypacket)
+
+
+if __name__=='__main__':
+
+    catchpackets()
