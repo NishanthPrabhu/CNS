@@ -4,47 +4,42 @@ __author__ = 'nishanth'
 
 import sys
 from scapy.all import *
+import modify_packet
 
 
 payload = ""
 
 
-#Function to accept payload for packets
+# Function to accept payload for packets
 
-def acceptLoad():
+def acceptload():
 
     global payload
 
     payload = raw_input('Enter data payload for packet: ')
 
 
+# Function to create the packets with IP, ICMP layers
 
-#Function to create the packets with IP, ICMP layers
-
-def createPacket():
+def createpacket():
 
     global payload
 
-    acceptLoad()
+    acceptload()
     packet = IP()/payload
+    #packet = IP()/ICMP()/payload
 
-    print('Packet being sent: ')
+    print('Unedited packet: ')
     print(packet.show2())
 
-    for i in range(10):
-        send(packet)
+    modify_packet.modifypacket(packet)
 
-
-
-#sequence number
-#frag offset
-#flag
-#tos
-#identification field
-#checksum modification?
+    print('Edited packet: ')
+    print(packet.show2())
+    send(packet)
 
 
 if __name__ == '__main__':
 
     print('Packet creator')
-    createPacket()
+    createpacket()

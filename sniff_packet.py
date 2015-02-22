@@ -2,14 +2,16 @@ from __future__ import print_function
 
 __author__ = 'jhanji'
 
-import sys
 from scapy.all import *
 
+
+# Function to detail detailed raw hex of packets received
 
 def displaypacket(packet):
 
     packet.show()
 
+# Function to look for packets in the network
 
 def catchpackets():
 
