@@ -4,7 +4,8 @@ __author__ = 'nishanth'
 
 import sys
 from scapy.all import *
-import modify_packet
+import modify_packetip
+import modify_packettcp
 
 
 payload = ""
@@ -26,20 +27,44 @@ def createpacket():
     global payload
 
     acceptload()
-    packet = IP()/payload
+    #packet = IP()/payload
+    packet = IP()/TCP()/payload
     #packet = IP()/ICMP()/payload
 
     print('Unedited packet: ')
     print(packet.show2())
 
-    modify_packet.modifypacket(packet)
+    choice = int(raw_input('\nDo you wish to modify the packet? '))
+    if choice==1:
 
-    print('Edited packet: ')
-    print(packet.show2())
+        print('\n1. IP level Fields')
+        print('2. TCP level Fields')
+        print('3. Both TCP and IP')
+        modchoice = int(raw_input('Enter your choice: '))
+
+        if modchoice == 1:
+
+            modify_packetip.modifypacket(packet)
+
+        elif modchoice == 2:
+
+            modify_packettcp.modifypacket(packet)
+
+        else:
+
+            modify_packetip.modifypacket(packet)
+            modify_packettcp.modifypacket(packet)
+
+
+        print('Edited packet: ')
+        print(packet.show2())
+
     send(packet)
+
+
 
 
 if __name__ == '__main__':
 
-    print('Packet creator')
+    print('###### Packet creator ###### \n')
     createpacket()

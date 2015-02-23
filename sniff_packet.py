@@ -9,7 +9,7 @@ from scapy.all import *
 
 def displaypacket(packet):
 
-    packet.show()
+    ls(packet)
 
 # Function to look for packets in the network
 

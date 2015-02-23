@@ -3,19 +3,21 @@ from __future__ import print_function
 __author__ = 'nishanth'
 
 from scapy.all import *
-
+from helper import *
 
 def modifypacket(packet):
+
+    print('\n###### IP Fields Modifier ######\n')
 
     choice = 1
 
     while True:
-        print('Modifiable IP fields: ')
+        print('\nModifiable IP fields: ')
         print('1. Fragmentation Flags')
         print('2. Identification Flags (16 bits) ')
         print('3. Checksum modification')
         print('4. Type of Service Field')
-        choice = int(raw_input('Enter choice: (0 to stop) '))
+        choice = int(raw_input('Enter choice(0 to stop): '))
 
 
         if choice == 0:
@@ -52,14 +54,13 @@ def modifyflags(packet):
 def modifyid(packet):
 
     newid = raw_input('Enter the new fragmentation id: ')
-    print(is_number(newid))
 
     while (is_number(newid) is False) or int(newid) > 65535:
         
         print("Invalid ID, enter a valid ID( integer < 65535)\n")
         newid = raw_input('Enter the new fragmentation id: ')
 
-    packet.id = int(newid)
+    packet[IP].id = int(newid)
     return
 
 # Function to modify the IP-level checksum
@@ -73,7 +74,7 @@ def modifychecksum(packet):
         print("Invalid checksum,enter a valid checksum: (integer < 65536) \n")
         newchksum = raw_input('Enter new data in checksum field: ')
 
-    packet.chksum = int(newchksum)
+    packet[IP].chksum = int(newchksum)
     return
 
 
@@ -87,16 +88,7 @@ def modifytos(packet):
         print("Invalid TOS, enter a valid TOS: (integer < 256)\n")
         newtos = raw_input('Enter type of service: ')
     
-    packet.tos = int(newtos)
+    packet[IP].tos = int(newtos)
     return
 
 
-# ##### Helper Function ##### #
-
-
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
