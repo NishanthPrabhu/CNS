@@ -47,7 +47,17 @@ def modifypacket(packet):
 # Function to modify the fragmentation offset field
 
 def modifyflags(packet):
-    pass
+    # It is supposed to be a field of 3 bit flags
+    # But behaves as an integer. Anyway, try to store values 0-7, total range of a 3 bit field
+    newflags = raw_input('Enter the new fragmentation id: ')
+
+    while (is_number(newflags) is False) or int(newid) > 7:
+        
+        print("Invalid ID, enter a valid ID(integer < 7)\n")
+        newflags = raw_input('Enter the new fragmentation flags: ')
+
+    packet[IP].flags = int(newflags)
+    return
 
 # Function to modify the fragmentation identification flags
 
